@@ -10,7 +10,7 @@ Get Started - Dependencies Installation Guide:
 
 3. Done
 
-=============================================================================
+================
 Project Roadmap:
  ⭐ 19 to 20: Project File
     19: Members, Planning, App Design
