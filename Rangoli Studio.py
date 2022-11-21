@@ -40,6 +40,7 @@ canvasT = Canvas(
 canvasT.place(relx=0.544, rely=0.540, anchor=CENTER)
 screen = turtle.TurtleScreen(canvasT)
 trtl = turtle.RawTurtle(canvasT)
+trtl.screen.bgcolor("#171717")
 trtl.color("green")
 
 # Variables
