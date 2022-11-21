@@ -1,4 +1,4 @@
-#Rangoli Studio, version = Alpha 17
+#Rangoli Studio, version = Alpha 18
 #By Section-F, CSE-MA
 #Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
@@ -30,15 +30,14 @@ background = canvas.create_image(
     image=background_img)
 
 #Variables
-click_num,x2,y2=0,0,0   #Line: Mouseclick
-radius_sv, num_of_sv, size_sv = StringVar(), StringVar(), StringVar()
+click_num,x2,y2=0,0,0      #Line: Mouseclick
+toggleSymmetry = False     #Symmetry On/OFF
+symmetryVal = 2            #Symmetry value 2 to 20
+fill_color = 'blue'        #Default Color
 radius, num_of, size = float,float,float
-                        #For SizeDialog
-toggleSymmetry = False  #Symmetry On/OFF
-symmetryVal = 2         #Symmetry value 2 to 20  
-fill_color = 'blue'
+                           #SizeDialog() & Functions
 
-#Functions
+#==Functions==
 def Pattern():
     SizeDialog('pattern')
     print('Pattern')
@@ -123,31 +122,25 @@ def Draw():
 
 #Dialogs & Helpers
 #Dialog to ask for size, curvature, etc
+radius_sv, num_of_sv, size_sv = DoubleVar(), DoubleVar(), DoubleVar()
 def SizeDialog(shape):
     global radius, num_of, size
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
-        radius = int(radius_sv.get()) #Converting to int
     if shape == "polygon":
         radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
         num_of_sv.set(simpledialog.askstring("Add "+shape,"Number of sides",parent=window))
-        radius = int(radius_sv.get()) #Converting to int
-        num_of = int(num_of_sv.get()) #Converting to int
     if shape == "petal":
         radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
         num_of_sv.set(simpledialog.askstring("Add "+shape,"Number of petals",parent=window))
-        radius = int(radius_sv.get()) #Converting to int
-        num_of = int(num_of_sv.get()) #Converting to int
     if shape == "pattern":
         radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
         size_sv.set(simpledialog.askstring("Add "+shape,"Size of dots",parent=window))
-        radius = int(radius_sv.get()) #Converting to int
-        size = int(size_sv.get()) #Converting to int
     #Converting to int
-    #radius = int(radius_sv.get())
-    #num_of = int(num_of_sv.get())
-    #size = int(size_sv.get())
+    radius = float(radius_sv.get())
+    num_of = float(num_of_sv.get())
+    size = float(size_sv.get())
 
 def btn_clicked():
     print("Button Clicked")
