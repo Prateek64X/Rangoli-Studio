@@ -1,10 +1,11 @@
-#Rangoli Studio, version = Alpha 16
+#Rangoli Studio, version = Alpha 17
 #By Section-F, CSE-MA
-#Credits: Prateek Panwar, Shashank Shinde, Tanaygeet Shrivastava, Pratham Rathore, Rishab Dosi, Harsh Mishra, Dhairya Jain, Saad Quereshi
+#Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
 from tkinter import simpledialog
 from tkinter import ttk
 from tktooltip import ToolTip
+import turtle
 
 #Window and Canvas
 window = Tk()
@@ -30,44 +31,56 @@ background = canvas.create_image(
 
 #Variables
 click_num,x2,y2=0,0,0   #Line: Mouseclick
-radius, num_of = StringVar(), StringVar()
+radius_sv, num_of_sv, size_sv = StringVar(), StringVar(), StringVar()
+radius, num_of, size = float,float,float
                         #For SizeDialog
 toggleSymmetry = False  #Symmetry On/OFF
 symmetryVal = 2         #Symmetry value 2 to 20  
-
+fill_color = 'blue'
 
 #Functions
 def Pattern():
     SizeDialog('pattern')
     print('Pattern')
     #Code
+    Draw()
+    for i in range (360):
+        if (i%2==0):
+            turtle.dot(size, fill_color)
+        turtle.end_fill()
    
 def CurveLine():
     print('CurveLine')
     #Code
+    Draw()
     
 
 def Polygon():
     SizeDialog('polygon')
     print('Polygon')
     #Code
+    Draw()
     
 
 def Circle():
     SizeDialog('circle')
-    print('Circle')
+    print('Circle','Radius = ',radius)
     #Code
-    
+    Draw()
+    turtle.circle(radius)
+    turtle.end_fill()
 
 def Arc():
     print('Arc')
     #Code
+    Draw()
     
     
 def Petal():
     SizeDialog('petal')
     print('Petal')
     #Code
+    Draw()
 
 def Text():
     print('Text')
@@ -83,10 +96,11 @@ def Symmetry():
     #Code
     
 
-def ColorSelection():
-    print('ColorSelection')
+def ColorSelection(color):
+    global fill_color
     #Code
-
+    fill_color = color
+    
 def ColorPallete():
     print('ColorPallete')
     #Code
@@ -103,21 +117,37 @@ def About():
     print('About')
     #Code
 
+def Draw():
+    turtle.fillcolor(fill_color)
+    turtle.begin_fill()
+
 #Dialogs & Helpers
 #Dialog to ask for size, curvature, etc
 def SizeDialog(shape):
+    global radius, num_of, size
     shape = shape.lower()
     if shape == "circle":
-        radius.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
+        radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
+        radius = int(radius_sv.get()) #Converting to int
     if shape == "polygon":
-        radius.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
-        num_of.set(simpledialog.askstring("Add "+shape,"Number of sides",parent=window))
+        radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
+        num_of_sv.set(simpledialog.askstring("Add "+shape,"Number of sides",parent=window))
+        radius = int(radius_sv.get()) #Converting to int
+        num_of = int(num_of_sv.get()) #Converting to int
     if shape == "petal":
-        radius.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
-        num_of.set(simpledialog.askstring("Add "+shape,"Number of petals",parent=window))
+        radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
+        num_of_sv.set(simpledialog.askstring("Add "+shape,"Number of petals",parent=window))
+        radius = int(radius_sv.get()) #Converting to int
+        num_of = int(num_of_sv.get()) #Converting to int
     if shape == "pattern":
-        radius.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
-        num_of.set(simpledialog.askstring("Add "+shape,"Space of dots",parent=window))
+        radius_sv.set(simpledialog.askstring("Add "+shape,"Enter radius",parent=window))
+        size_sv.set(simpledialog.askstring("Add "+shape,"Size of dots",parent=window))
+        radius = int(radius_sv.get()) #Converting to int
+        size = int(size_sv.get()) #Converting to int
+    #Converting to int
+    #radius = int(radius_sv.get())
+    #num_of = int(num_of_sv.get())
+    #size = int(size_sv.get())
 
 def btn_clicked():
     print("Button Clicked")
@@ -150,7 +180,7 @@ b1 = Button(
     image = img1,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#FFB950'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -164,7 +194,7 @@ b2 = Button(
     image = img2,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#ab5539'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -178,7 +208,7 @@ b3 = Button(
     image = img3,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#0d0c0d'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -192,7 +222,7 @@ b4 = Button(
     image = img4,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#fefffe'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -206,7 +236,7 @@ b5 = Button(
     image = img5,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#7929fb'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -220,7 +250,7 @@ b6 = Button(
     image = img6,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#27a2ff'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -234,7 +264,7 @@ b7 = Button(
     image = img7,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#71f897'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -249,7 +279,7 @@ b8 = Button(
     image = img8,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#ec8e01'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -264,7 +294,7 @@ b9 = Button(
     image = img9,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#da0539'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
@@ -278,7 +308,7 @@ b10 = Button(
     image = img10,
     borderwidth = 0,
     highlightthickness = 0,
-    command = lambda: ColorSelection(),
+    command = lambda: ColorSelection('#f55f9d'),
     relief = "flat",
     activebackground = "#000000",
     bg = "#171717")
