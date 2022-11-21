@@ -1,0 +1,11 @@
+Get Started - Dependencies Installation Guide:
+1. Make sure python and python\Scripts directory is added to environment path 
+	(ex: C:\Users\%username%\AppData\Local\Programs\Python\Python310
+	 and C:\Users\%username%\AppData\Local\Programs\Python\Python310\Scripts)
+
+2. Open command prompt, and write following commands to install dependencies:
+	pip install turtle
+	pip install tkinter
+	pip install tkinter-tooltip
+
+3. Done
