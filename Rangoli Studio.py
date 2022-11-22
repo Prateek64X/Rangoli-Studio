@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 20
+# Rangoli Studio, version = Alpha 22
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
@@ -40,8 +40,10 @@ canvasT = Canvas(
 canvasT.place(relx=0.544, rely=0.540, anchor=CENTER)
 screen = turtle.TurtleScreen(canvasT)
 trtl = turtle.RawTurtle(canvasT)
+# trtl.listen()
+trtl.speed(-1)
 trtl.screen.bgcolor("#171717")
-trtl.color("green")
+trtl.color("white")
 
 # Variables
 click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
@@ -100,7 +102,7 @@ def Petal():
     Draw()
 
 
-def Text():
+def text():
     print('Text')
     # Code
 
@@ -131,7 +133,7 @@ def FileSystem(fs: int):
     # Code
 
 
-def Grid():
+def grid():
     print('Grid')
     # Code
 
@@ -145,6 +147,25 @@ def Draw():
     trtl.fillcolor(fill_color)
     trtl.begin_fill()
 
+# Turtle functions
+
+
+def clickRight():
+    trtl.clear()
+
+    # To move turtle with mouse drag
+
+
+def Drag_Turtle(x, y):
+    trtl.ondrag(None)
+    trtl.setheading(trtl.towards(x, y))
+    trtl.penup()
+    trtl.goto(x, y)
+    trtl.pendown()
+    trtl.ondrag(Drag_Turtle)
+
+
+trtl.ondrag(Drag_Turtle)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
@@ -382,7 +403,7 @@ b12 = Button(
     image=img12,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Text(),
+    command=lambda: text(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
@@ -517,7 +538,7 @@ b21 = Button(
     image=img21,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Grid(),
+    command=lambda: grid(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
