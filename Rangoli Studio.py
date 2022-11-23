@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 23
+# Rangoli Studio, version = Alpha 24
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
