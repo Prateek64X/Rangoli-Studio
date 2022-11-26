@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 25
+# Rangoli Studio, version = Alpha 26
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
@@ -49,8 +49,8 @@ trtl.color("white")
 click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
-fill_color = 'blue'  # Default Color
-radius, num_of, size = float, float, float
+fill_color, line_color = 'blue', 'white'  # Default Color
+radius, num_of, distance, size = float, float, 10, float
 #SizeDialog() & Functions
 
 # ==Functions==
@@ -58,13 +58,22 @@ radius, num_of, size = float, float, float
 
 def Pattern():
     SizeDialog('pattern')
-    print('Pattern')
+    print('Pattern :-')
     # Code
     Draw()
-    for i in range(360):
-        if (i % 2 == 0):
-            trtl.dot(size, fill_color)
-        trtl.end_fill()
+    if (distance <= 0):
+        return
+    trtl.penup()
+
+    circumference = 2 * 3.14 * radius
+    dot_extent = 360 * size*distance / circumference  # diameter to angle
+
+    extent = 0
+    while extent < 360:
+        trtl.dot(size)
+        trtl.circle(radius, extent=dot_extent)
+
+        extent += dot_extent
 
 
 def CurveLine():
@@ -120,8 +129,10 @@ def Symmetry():
 
 def ColorSelection(color):
     global fill_color
+    global line_color
     # Code
     fill_color = color
+    line_color = color
 
 
 def ColorPallete():
@@ -146,6 +157,7 @@ def About():
 
 def Draw():
     trtl.fillcolor(fill_color)
+    trtl.color(line_color)
     trtl.begin_fill()
 
 # Turtle functions
