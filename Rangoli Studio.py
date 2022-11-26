@@ -1,6 +1,10 @@
 # Rangoli Studio, version = Alpha 27
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
+# For new starters: Check ==Variables== and ==Shape Functions==
+#                   Check Circle() in ==Shape Functions== 
+#                   and read comments.
+
 from tkinter import *
 from tkinter import simpledialog
 from tktooltip import ToolTip
@@ -48,15 +52,17 @@ click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color = 'blue', 'white'  # Default Color
-radius, num_of, distance, size = float, float, float, float
-#SizeDialog() & Functions
+radius, num_of, distance, size = float, float, float, float  #SizeDialog() & Functions
 
-# == Functions ==
+# == Drawing Functions ==
+# Useful variables: radius, num_of, distance, size
+# Useful functions: SizeDialog('enter_shape_name'), SetColor(), CenterTurtle() 
+# Use trtl.x instead of turtle.x
 def Circle():
     # SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
     SizeDialog('circle')
     SetColor()  # Sets chosen color
-    CenterTurtle()
+    CenterTurtle()  # Centers turtle before drawing circle
     trtl.circle(radius)  # Draw circle for given radius
     trtl.end_fill()  # Fill color
 
@@ -81,7 +87,6 @@ def CurveLine():
     print('CurveLine')
     SetColor()
     # Code
-
 
 
 def Polygon():
@@ -123,7 +128,6 @@ def ColorSelection(color):
     fill_color = color
     line_color = color
 
-
 def ColorPallete():
     print('ColorPallete')
     # Code
@@ -138,12 +142,11 @@ def grid():
     print('Grid')
     # Code
 
-
 def About():
     print('About')
     # Code
 
-
+# == Helper Functions ==
 def SetColor():
     trtl.fillcolor(fill_color)
     trtl.color(line_color)
