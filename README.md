@@ -21,41 +21,41 @@ Team Members:
  Total Members (currently): 8
 
 Basic functionality:
-✅ 1. Pattern - Create ..., --- like circular patterns
+
+✅ 1. Circle - Draw circles
+
+✅ 2. DotPattern - Create circular pattern
 
 2. CurveLine - Draw curve lines
 
-4. Polygon - Draw polygons with variable sides
+3. Polygon - Draw polygons with variable sides
 
-✅ 4. Circle - Draw circles
+4. Arc - Draw circular arcs in a gear like pattern
 
-5. Arc - Draw circular arcs in a gear like pattern
+5. PaintBucket - Paint the selected enclosed shape
 
-7. PaintBucket - Paint the selected enclosed shape
+6. Petal pattern - Draw circular petal design
 
-9. Petal pattern - Draw circular petal design
+7. Text - Add Text on screen
 
-11. Text - Add Text on screen
+8. Symmetry - Toggle On/Off Symmetry option
 
-13. Symmetry - Toggle On/Off Symmetry option
+✅ 9. Colors - Changes color variable used for filling and drawing
 
-✅ 10. Colors - Changes color variable used for filling and drawing
+10. Color Pallete - Choose variety of colors
 
-11. Color Pallete - Choose variety of colors
+11. File Save-open System (FileSystem)
 
-13. File Save-open System (FileSystem)
+12. Grid - Show/Hide
 
-15. Grid - Show/Hide
-
-17. About - Show credits of all developers and a cool intro of our app
+13. About - Show credits of all developers and a cool intro of our app
 
 App Features:
  0. New UI: Easy to use and simple modern design
-
- 1. Symmetry function - Choose range 4-8 blocks and designing 1 corner wil change all symmetrically
- 2. Petal: Adds flower like pattern within given no. of petals
+ 1. Petal: Adds flower like pattern within given no. of petals
  3. Pattern: Create ..., --- like circular patterns
- 3. Grid: For precise drawing, It will just show Grid
- 4. Color Pallete: Choose colors
+ 4. Grid: For precise drawing, It will just show Grid
+ 5. Color Pallete: Choose colors
+ 6. Symmetry function - Choose range 4-8 blocks and designing 1 corner wil change all symmetrically
  
 [Later] 5. Layer: Draw on layers, hide, add or delete to make easy changes after saving
