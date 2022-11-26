@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 24
+# Rangoli Studio, version = Alpha 25
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
@@ -81,12 +81,14 @@ def Polygon():
 
 
 def Circle():
-    SizeDialog('circle')                    #SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
-    Draw()                                  #Sets chosen color
-    trtl.setheading(0)                      ###Rotation to 0
-    GOTO(0,-radius)                         ###To goto given position relatively
-    trtl.circle(radius)                     ###Draw circle for given radius
-    trtl.end_fill()                         #Fill color
+    # SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
+    SizeDialog('circle')
+    Draw()  # Sets chosen color
+    trtl.setheading(0)  # Rotation to 0
+    GOTO(0, -radius)  # To goto given position relatively
+    trtl.circle(radius)  # Draw circle for given radius
+    trtl.end_fill()  # Fill color
+
 
 def Arc():
     print('Arc')
@@ -153,6 +155,8 @@ def clickRight():
     trtl.clear()
 
     # To move turtle with mouse drag
+
+
 def Drag_Turtle(x, y):
     trtl.ondrag(None)
     trtl.setheading(trtl.towards(x, y))
@@ -161,7 +165,8 @@ def Drag_Turtle(x, y):
     trtl.pendown()
     trtl.ondrag(Drag_Turtle)
 
-def GOTO(x,y):
+
+def GOTO(x, y):
     trtl.penup()
     trtl.goto(trtl.pos() + (x, y))
     trtl.pendown()
