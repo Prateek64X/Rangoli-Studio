@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 26
+# Rangoli Studio, version = Alpha 27
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 from tkinter import *
@@ -8,7 +8,6 @@ import turtle
 
 #Window and Canvas
 window = Tk()
-
 window.geometry("1280x720")
 window.title("Rangoli Studio")
 window.configure(bg="#222222")
@@ -26,7 +25,6 @@ background_img = PhotoImage(file=f"./images/background.png")
 background = canvas.create_image(
     640.0, 359.0,
     image=background_img)
-# canvas.pack(anchor=SE)
 
 # Turtle config
 canvasT = Canvas(
@@ -45,29 +43,33 @@ trtl.speed(-1)
 trtl.screen.bgcolor("#171717")
 trtl.color("white")
 
-# Variables
+# == Variables ==
 click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color = 'blue', 'white'  # Default Color
-radius, num_of, distance, size = float, float, 10, float
+radius, num_of, distance, size = float, float, float, float
 #SizeDialog() & Functions
 
-# ==Functions==
+# == Functions ==
+def Circle():
+    # SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
+    SizeDialog('circle')
+    SetColor()  # Sets chosen color
+    CenterTurtle()
+    trtl.circle(radius)  # Draw circle for given radius
+    trtl.end_fill()  # Fill color
 
-
-def Pattern():
-    SizeDialog('pattern')
-    print('Pattern :-')
-    # Code
-    Draw()
-    if (distance <= 0):
-        return
+def DotPattern():
+    global distance
+    SizeDialog('dotpattern')
+    SetColor()
+    CenterTurtle()
+    if (distance <= 0.0):
+        distance = 5.0
     trtl.penup()
-
     circumference = 2 * 3.14 * radius
     dot_extent = 360 * size*distance / circumference  # diameter to angle
-
     extent = 0
     while extent < 360:
         trtl.dot(size)
@@ -75,41 +77,29 @@ def Pattern():
 
         extent += dot_extent
 
-
 def CurveLine():
     print('CurveLine')
+    SetColor()
     # Code
-    Draw()
+
 
 
 def Polygon():
     SizeDialog('polygon')
     print('Polygon')
-    # Code
-    Draw()
-
-
-def Circle():
-    # SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
-    SizeDialog('circle')
-    Draw()  # Sets chosen color
-    trtl.setheading(0)  # Rotation to 0
-    GOTO(0, -radius)  # To goto given position relatively
-    trtl.circle(radius)  # Draw circle for given radius
-    trtl.end_fill()  # Fill color
-
+    SetColor()
 
 def Arc():
     print('Arc')
+    SetColor()
     # Code
-    Draw()
 
 
 def Petal():
     SizeDialog('petal')
     print('Petal')
+    SetColor()
     # Code
-    Draw()
 
 
 def text():
@@ -130,7 +120,6 @@ def Symmetry():
 def ColorSelection(color):
     global fill_color
     global line_color
-    # Code
     fill_color = color
     line_color = color
 
@@ -155,20 +144,20 @@ def About():
     # Code
 
 
-def Draw():
+def SetColor():
     trtl.fillcolor(fill_color)
     trtl.color(line_color)
     trtl.begin_fill()
 
-# Turtle functions
+def CenterTurtle():
+    trtl.setheading(0)  # Rotation to 0
+    GOTO(0, -radius)  # To goto given position relatively
 
-
+## Turtle functions
 def clickRight():
     trtl.clear()
 
-    # To move turtle with mouse drag
-
-
+## To move turtle with mouse drag
 def Drag_Turtle(x, y):
     trtl.ondrag(None)
     trtl.setheading(trtl.towards(x, y))
@@ -177,29 +166,28 @@ def Drag_Turtle(x, y):
     trtl.pendown()
     trtl.ondrag(Drag_Turtle)
 
-
 def GOTO(x, y):
     trtl.penup()
     trtl.goto(trtl.pos() + (x, y))
     trtl.pendown()
 
-
 trtl.ondrag(Drag_Turtle)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv = DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar()
 
 
 def SizeDialog(shape):
-    global radius, num_of, size
+    global radius, num_of, size, distance
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
     if shape == "polygon":
-        radius_sv.set(simpledialog.askstring(
-            "Add "+shape, "Enter radius", parent=window))
+        size_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter size of side", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of sides", parent=window))
     if shape == "petal":
@@ -207,15 +195,18 @@ def SizeDialog(shape):
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of petals", parent=window))
-    if shape == "pattern":
+    if shape == "dotpattern":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
         size_sv.set(simpledialog.askstring(
             "Add "+shape, "Size of dots", parent=window))
+        distance_sv.set(simpledialog.askstring(
+            "Add "+shape, "Distance of dots", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
     num_of = float(num_of_sv.get())
     size = float(size_sv.get())
+    distance = float(distance_sv.get())
 
 
 def btn_clicked():
@@ -223,7 +214,7 @@ def btn_clicked():
 
 
 # Function initialization
-# canvas.bind('<Button-1>', Pattern)   #Removed
+# canvas.bind('<Button-1>', DotPattern)   #Removed
 
 # Buttons
 # Button's icon
@@ -527,7 +518,7 @@ b19 = Button(
     image=img19,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Pattern(),
+    command=lambda: DotPattern(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
