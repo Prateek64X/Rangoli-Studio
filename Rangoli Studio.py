@@ -1,13 +1,14 @@
-# Rangoli Studio, version = Alpha 28
+# Rangoli Studio, version = Alpha 30
 # By Section-F, CSE-MA
-# Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
+# Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
 #                   Check Circle() in ==Shape Functions== 
 #                   and read comments.
 
 from tkinter import *
-from tkinter import simpledialog
+from tkinter import simpledialog, filedialog
 from tktooltip import ToolTip
+from PIL import Image, ImageTk, EpsImagePlugin
 import turtle
 
 #Window and Canvas
@@ -135,16 +136,41 @@ def ColorPallete():
 
 def FileSystem(fs: int):
     print('FileSystem', fs)
-    # Code
+    filename = 'image'
+    #New File
+    if (fs == 0):
+        trtl.clear()
+        trtl.setheading(0)
+        trtl.penup()
+        trtl.goto(0,0)
+        trtl.pendown()
+    #Open File
+    elif (fs == 1):
+        print("Open")
+        file_path = filedialog.askopenfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+    #Save File
+    elif (fs == 2):
+        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+        canvasT.postscript(file=file_path, colormode='color')
 
 
 def grid():
+    #Canvas size = 1130x630
     print('Grid')
-    # Code
 
 def About():
     print('About')
-    # Code
+    newWindow = Toplevel(window)
+    newWindow.title("New Window")
+    newWindow.geometry("400x400")
+    
+    
+    Label(newWindow,text ="About Software - Created by Harsh - Edit this Section").pack()
+    # add bg 
+    # bgimg= Tk.PhotoImage(file=f"./images/bg132.png")
+    # limg= Label(newWindow, i=bgimg)
+    # limg.pack()
+
 
 # == Helper Functions ==
 def SetColor():
@@ -157,8 +183,11 @@ def CenterTurtle():
     GOTO(0, -radius)  # To goto given position relatively
 
 ## Turtle functions
-def clickRight():
-    trtl.clear()
+def clickRight(x,y):
+    h = trtl.heading()
+    if(h % 90 != 0):
+        trtl.setheading(0)
+    trtl.setheading(trtl.heading()-90)
 
 ## To move turtle with mouse drag
 def Drag_Turtle(x, y):
@@ -175,6 +204,7 @@ def GOTO(x, y):
     trtl.pendown()
 
 trtl.ondrag(Drag_Turtle)
+trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
