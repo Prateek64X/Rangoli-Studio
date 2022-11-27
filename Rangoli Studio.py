@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 30
+# Rangoli Studio, version = Alpha 31
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
