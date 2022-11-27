@@ -160,7 +160,17 @@ def grid():
 
 def About():
     print('About')
-    # Code
+    newWindow = Toplevel(window)
+    newWindow.title("New Window")
+    newWindow.geometry("400x400")
+    
+    
+    Label(newWindow,text ="About Software - Created by Harsh - Edit this Section").pack()
+    # add bg 
+    # bgimg= Tk.PhotoImage(file=f"./images/bg132.png")
+    # limg= Label(newWindow, i=bgimg)
+    # limg.pack()
+
 
 # == Helper Functions ==
 def SetColor():
