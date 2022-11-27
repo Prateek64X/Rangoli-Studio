@@ -1,6 +1,6 @@
 # Rangoli Studio, version = Alpha 30
 # By Section-F, CSE-MA
-# Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
+# Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
 #                   Check Circle() in ==Shape Functions== 
 #                   and read comments.
