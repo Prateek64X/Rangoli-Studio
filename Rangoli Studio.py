@@ -53,7 +53,7 @@ click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color = 'blue', 'white'  # Default Color
-radius, num_of, distance, size = float, float, float, float  #SizeDialog() & Functions
+radius, num_of, distance, size, sharpness = float, float, float, float, float  #SizeDialog() & Functions
 
 # == Drawing Functions ==
 # Useful variables: radius, num_of, distance, size
@@ -84,10 +84,14 @@ def DotPattern():
 
         extent += dot_extent
 
-def CurveLine():
-    print('CurveLine')
+def Arc():
+    #1. User point turtle and clicks button
+    #2. User then drags turtle to another location
+    #3. After leaving left click, SizeDialog is called
+    pos_before = trtl.position  #Note pos before dragging
+    #Call after finishing drag
+    SizeDialog('arc')
     SetColor()
-    # Code
 
 
 def Polygon():
@@ -95,15 +99,16 @@ def Polygon():
     print('Polygon')
     SetColor()
 
-def Arc():
-    print('Arc')
+def Flower():
+    SizeDialog('flower')
+    print('flower')
     SetColor()
     # Code
 
 
-def Petal():
-    SizeDialog('petal')
-    print('Petal')
+def Leaf():
+    SizeDialog('leaf')
+    print('Leaf')
     SetColor()
     # Code
 
@@ -160,16 +165,17 @@ def grid():
 
 def About():
     print('About')
-    newWindow = Toplevel(window)
-    newWindow.title("New Window")
-    newWindow.geometry("400x400")
-    
-    
-    Label(newWindow,text ="About Software - Created by Harsh - Edit this Section").pack()
-    # add bg 
-    # bgimg= Tk.PhotoImage(file=f"./images/bg132.png")
-    # limg= Label(newWindow, i=bgimg)
-    # limg.pack()
+    aboutWin = Toplevel(window)
+    aboutWin.title("New Window")
+    aboutWin.geometry("400x400")
+    aboutWin.configure(bg="#171717")
+    Label(aboutWin,text ="About Software - Created by Harsh - Edit this Section",
+        fg="#ffffff",
+        bg="#171717").pack()
+    #Center window
+    #Add Description
+    #Controls
+    #Designed by & Add github link of project
 
 
 # == Helper Functions ==
@@ -208,8 +214,8 @@ trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
-), DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv, sharpness_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar(), DoubleVar()
 
 
 def SizeDialog(shape):
@@ -223,11 +229,13 @@ def SizeDialog(shape):
             "Add "+shape, "Enter size of side", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of sides", parent=window))
-    if shape == "petal":
+    if shape == "leaf":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
-            "Add "+shape, "Number of petals", parent=window))
+            "Add "+shape, "Number of leaves", parent=window))
+        sharpness_sv.set(simpledialog.askstring(
+            "Add "+shape, "Sharpness", parent=window))    
     if shape == "dotpattern":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -235,11 +243,20 @@ def SizeDialog(shape):
             "Add "+shape, "Size of dots", parent=window))
         distance_sv.set(simpledialog.askstring(
             "Add "+shape, "Distance of dots", parent=window))
+    if shape == "arc":
+        radius_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter radius", parent=window))
+    if shape == "flower":
+        radius_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter radius", parent=window))
+        num_of_sv.set(simpledialog.askstring(
+            "Add "+shape, "Number of petals", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
     num_of = float(num_of_sv.get())
     size = float(size_sv.get())
     distance = float(distance_sv.get())
+    sharpness = float(sharpness_sv.get())
 
 
 def btn_clicked():
@@ -461,7 +478,7 @@ b13 = Button(
     image=img13,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Petal(),
+    command=lambda: Leaf(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
@@ -469,7 +486,7 @@ b13.place(
     x=22, y=241,
     width=37,
     height=37)
-ToolTip(b13, msg="Petal")
+ToolTip(b13, msg="Leaf")
 
 img14 = PhotoImage(file=f"./images/img14.png")
 b14 = Button(
@@ -491,7 +508,7 @@ b15 = Button(
     image=img15,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Arc(),
+    command=lambda: Flower(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
@@ -499,7 +516,7 @@ b15.place(
     x=22, y=197,
     width=37,
     height=37)
-ToolTip(b15, msg="Arc")
+ToolTip(b15, msg="Make Flower pattern")
 
 img16 = PhotoImage(file=f"./images/img16.png")
 b16 = Button(
@@ -536,7 +553,7 @@ b18 = Button(
     image=img18,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: CurveLine(),
+    command=lambda: Arc(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
@@ -544,7 +561,7 @@ b18.place(
     x=66, y=109,
     width=37,
     height=37)
-ToolTip(b18, msg="Curve Line")
+ToolTip(b18, msg="Make an Arc")
 
 img19 = PhotoImage(file=f"./images/img19.png")
 b19 = Button(
