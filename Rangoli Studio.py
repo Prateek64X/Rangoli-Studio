@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 31
+# Rangoli Studio, version = Alpha 32
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -99,16 +99,16 @@ def Polygon():
     print('Polygon')
     SetColor()
     
-    t = turtle.Turtle()
+    #t = turtle.Turtle()
   
-# taking input for the no of the sides of the polygon
-n = int(input("Enter the no of the sides of the polygon : "))
+    # taking input for the no of the sides of the polygon
+    #n = int(input("Enter the no of the sides of the polygon : "))
   
-# taking input for the length of the sides of the polygon
-l = int(input("Enter the length of the sides of the polygon : "))
-for _ in range(n):
-    turtle.forward(l)
-    turtle.right(360 / n)
+    # taking input for the length of the sides of the polygon
+    #l = int(input("Enter the length of the sides of the polygon : "))
+    #for _ in range(n):
+    #    turtle.forward(l)
+    #    turtle.right(360 / n)
 
 def Flower():
     SizeDialog('flower')
@@ -140,14 +140,15 @@ def Symmetry():
 
 
 def ColorSelection(color):
-    global fill_color
-    global line_color
+    global fill_color, line_color
     fill_color = color
     line_color = color
 
 def ColorPallete():
+    global fill_color, line_color
     print('ColorPallete')
-    # Code
+    fill_color = "blue"
+    line_color = "blue"
 
 
 def FileSystem(fs: int):
@@ -284,7 +285,7 @@ b0 = Button(
     image=img0,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: ColorSelection(),  # This will call function for given button
+    command=lambda: ColorPallete(),  # This will call function for given button
     relief="flat",
     activebackground="#000000",
     bg="#171717")
