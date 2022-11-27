@@ -1,14 +1,18 @@
-# Rangoli Studio, version = Alpha 24
+# Rangoli Studio, version = Alpha 29
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Quereshi, Samarth Dubey
+# For new starters: Check ==Variables== and ==Shape Functions==
+#                   Check Circle() in ==Shape Functions== 
+#                   and read comments.
+
 from tkinter import *
-from tkinter import simpledialog
+from tkinter import simpledialog, filedialog
 from tktooltip import ToolTip
+from PIL import Image, ImageTk, EpsImagePlugin
 import turtle
 
 #Window and Canvas
 window = Tk()
-
 window.geometry("1280x720")
 window.title("Rangoli Studio")
 window.configure(bg="#222222")
@@ -26,7 +30,6 @@ background_img = PhotoImage(file=f"./images/background.png")
 background = canvas.create_image(
     640.0, 359.0,
     image=background_img)
-# canvas.pack(anchor=SE)
 
 # Turtle config
 canvasT = Canvas(
@@ -45,60 +48,64 @@ trtl.speed(-1)
 trtl.screen.bgcolor("#171717")
 trtl.color("white")
 
-# Variables
+# == Variables ==
 click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
-fill_color = 'blue'  # Default Color
-radius, num_of, size = float, float, float
-#SizeDialog() & Functions
+fill_color, line_color = 'blue', 'white'  # Default Color
+radius, num_of, distance, size = float, float, float, float  #SizeDialog() & Functions
 
-# ==Functions==
+# == Drawing Functions ==
+# Useful variables: radius, num_of, distance, size
+# Useful functions: SizeDialog('enter_shape_name'), SetColor(), CenterTurtle() 
+# Use trtl.x instead of turtle.x
+def Circle():
+    # SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
+    SizeDialog('circle')
+    SetColor()  # Sets chosen color
+    CenterTurtle()  # Centers turtle before drawing circle
+    trtl.circle(radius)  # Draw circle for given radius
+    trtl.end_fill()  # Fill color
 
+def DotPattern():
+    global distance
+    SizeDialog('dotpattern')
+    SetColor()
+    CenterTurtle()
+    if (distance <= 0.0):
+        distance = 5.0
+    trtl.penup()
+    circumference = 2 * 3.14 * radius
+    dot_extent = 360 * size*distance / circumference  # diameter to angle
+    extent = 0
+    while extent < 360:
+        trtl.dot(size)
+        trtl.circle(radius, extent=dot_extent)
 
-def Pattern():
-    SizeDialog('pattern')
-    print('Pattern')
-    # Code
-    Draw()
-    for i in range(360):
-        if (i % 2 == 0):
-            trtl.dot(size, fill_color)
-        trtl.end_fill()
-
+        extent += dot_extent
 
 def CurveLine():
     print('CurveLine')
+    SetColor()
     # Code
-    Draw()
 
 
 def Polygon():
     SizeDialog('polygon')
     print('Polygon')
-    # Code
-    Draw()
-
-
-def Circle():
-    SizeDialog('circle')                    #SizeDialog takes input from user. ex: SizeDialog('enter_your_shape')
-    Draw()                                  #Sets chosen color
-    trtl.setheading(0)                      ###Rotation to 0
-    GOTO(0,-radius)                         ###To goto given position relatively
-    trtl.circle(radius)                     ###Draw circle for given radius
-    trtl.end_fill()                         #Fill color
+    SetColor()
 
 def Arc():
     print('Arc')
+    SetColor()
     # Code
-    Draw()
 
 
 def Petal():
     SizeDialog('petal')
     print('Petal')
+    SetColor()
     # Code
-    Draw()
 
 
 def text():
@@ -118,9 +125,9 @@ def Symmetry():
 
 def ColorSelection(color):
     global fill_color
-    # Code
+    global line_color
     fill_color = color
-
+    line_color = color
 
 def ColorPallete():
     print('ColorPallete')
@@ -129,13 +136,27 @@ def ColorPallete():
 
 def FileSystem(fs: int):
     print('FileSystem', fs)
-    # Code
+    filename = 'image'
+    #New File
+    if (fs == 0):
+        trtl.clear()
+        trtl.setheading(0)
+        trtl.penup()
+        trtl.goto(0,0)
+        trtl.pendown()
+    #Open File
+    elif (fs == 1):
+        print("Open")
+        file_path = filedialog.askopenfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+    #Save File
+    elif (fs == 2):
+        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+        canvasT.postscript(file=file_path, colormode='color')
 
 
 def grid():
+    #Canvas size = 1130x630
     print('Grid')
-    # Code
-
 
 def About():
     print('About')
@@ -151,18 +172,24 @@ def About():
     # limg.pack()
 
 
-
-def Draw():
+# == Helper Functions ==
+def SetColor():
     trtl.fillcolor(fill_color)
+    trtl.color(line_color)
     trtl.begin_fill()
 
-# Turtle functions
+def CenterTurtle():
+    trtl.setheading(0)  # Rotation to 0
+    GOTO(0, -radius)  # To goto given position relatively
 
+## Turtle functions
+def clickRight(x,y):
+    h = trtl.heading()
+    if(h % 90 != 0):
+        trtl.setheading(0)
+    trtl.setheading(trtl.heading()-90)
 
-def clickRight():
-    trtl.clear()
-
-    # To move turtle with mouse drag
+## To move turtle with mouse drag
 def Drag_Turtle(x, y):
     trtl.ondrag(None)
     trtl.setheading(trtl.towards(x, y))
@@ -171,28 +198,29 @@ def Drag_Turtle(x, y):
     trtl.pendown()
     trtl.ondrag(Drag_Turtle)
 
-def GOTO(x,y):
+def GOTO(x, y):
     trtl.penup()
     trtl.goto(trtl.pos() + (x, y))
     trtl.pendown()
 
-
 trtl.ondrag(Drag_Turtle)
+trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv = DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar()
 
 
 def SizeDialog(shape):
-    global radius, num_of, size
+    global radius, num_of, size, distance
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
     if shape == "polygon":
-        radius_sv.set(simpledialog.askstring(
-            "Add "+shape, "Enter radius", parent=window))
+        size_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter size of side", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of sides", parent=window))
     if shape == "petal":
@@ -200,15 +228,18 @@ def SizeDialog(shape):
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of petals", parent=window))
-    if shape == "pattern":
+    if shape == "dotpattern":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
         size_sv.set(simpledialog.askstring(
             "Add "+shape, "Size of dots", parent=window))
+        distance_sv.set(simpledialog.askstring(
+            "Add "+shape, "Distance of dots", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
     num_of = float(num_of_sv.get())
     size = float(size_sv.get())
+    distance = float(distance_sv.get())
 
 
 def btn_clicked():
@@ -216,7 +247,7 @@ def btn_clicked():
 
 
 # Function initialization
-# canvas.bind('<Button-1>', Pattern)   #Removed
+# canvas.bind('<Button-1>', DotPattern)   #Removed
 
 # Buttons
 # Button's icon
@@ -520,7 +551,7 @@ b19 = Button(
     image=img19,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: Pattern(),
+    command=lambda: DotPattern(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
