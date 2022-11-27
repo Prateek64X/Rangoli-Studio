@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 32
+# Rangoli Studio, version = Alpha 33
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -6,7 +6,7 @@
 #                   and read comments.
 
 from tkinter import *
-from tkinter import simpledialog, filedialog
+from tkinter import simpledialog, filedialog, colorchooser
 from tktooltip import ToolTip
 from PIL import Image, ImageTk, EpsImagePlugin
 import turtle
@@ -146,9 +146,10 @@ def ColorSelection(color):
 
 def ColorPallete():
     global fill_color, line_color
-    print('ColorPallete')
-    fill_color = "blue"
-    line_color = "blue"
+    color_code = colorchooser.askcolor(title ="Choose color")
+    print(color_code)
+    fill_color = color_code[1]
+    line_color = color_code[1]
 
 
 def FileSystem(fs: int):
