@@ -26,15 +26,15 @@ Basic functionality:
 
 ✅ 2. DotPattern - Create circular pattern
 
-2. CurveLine - Draw curve lines
+2. Arc - Draw an arc from A point to B
 
 3. Polygon - Draw polygons with variable sides
 
-4. Arc - Draw circular arcs in a gear like pattern
+4. Flower - Draw flower petals over a circlular path
 
 5. PaintBucket - Paint the selected enclosed shape
 
-6. Petal pattern - Draw circular petal design
+6. Leaf - Draw sharp leaves over a circular path
 
 7. Text - Add Text on screen
 
