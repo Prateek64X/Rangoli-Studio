@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 37
+# Rangoli Studio, version = Alpha 38
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -53,9 +53,10 @@ trtl.color("white")
 click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
-fill_color, line_color = 'blue', 'white'  # Default Color
+fill_color, line_color, canFill = 'blue', 'white', True  # Default Color
 radius, distance, sharpness, num_of, size = float, float, float, int, int  #SizeDialog() & Functions
 psize = int #Pen Size
+
 # == Drawing Functions ==
 # Useful variables: radius, num_of, distance, size
 # Useful functions: SizeDialog('enter_shape_name'), SetColor(), CenterTurtle() 
@@ -108,6 +109,7 @@ def Polygon():
         trtl.forward(size)
         trtl.right(360 / num_of)
     trtl.pensize(1)
+    trtl.end_fill()
 
 def Flower():
     SizeDialog('flower')
@@ -120,6 +122,7 @@ def Flower():
         trtl.circle(radius*3.5/num_of,180)
     trtl.pendown()
     trtl.setheading(0)
+    trtl.end_fill()
 
 
 def Leaf():
@@ -134,6 +137,7 @@ def LeafBranch():
     trtl.left(120)
     trtl.circle(radius, 60)
     trtl.setheading(heading)
+    trtl.end_fill()
 
 def text():
     print('Text')
@@ -149,6 +153,12 @@ def Symmetry():
         toggleSymmetry = False
     # Code
 
+def PaintBucket():
+    global canFill
+    if (canFill == True):
+        canFill = False
+    else:
+        canFill = True
 
 def ColorSelection(color):
     global fill_color, line_color
@@ -229,9 +239,11 @@ def About():
 
 # == Helper Functions ==
 def SetColor():
+    global canFill
     trtl.fillcolor(fill_color)
     trtl.color(line_color)
-    trtl.begin_fill()
+    if (canFill == True):
+        trtl.begin_fill()
 
 def CenterTurtle():
     trtl.setheading(0)  # Rotation to 0
@@ -542,7 +554,7 @@ b14 = Button(
     image=img14,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: ColorPallete(),
+    command=lambda: PaintBucket(),
     relief="flat",
     activebackground="#000000",
     bg="#171717")
