@@ -9,6 +9,7 @@ from tkinter import *
 from tkinter import simpledialog, filedialog, colorchooser
 from tktooltip import ToolTip
 from PIL import Image, ImageTk, EpsImagePlugin
+from turtle import Turtle, Screen
 import turtle
 
 #Window and Canvas
@@ -112,17 +113,27 @@ def Polygon():
 
 def Flower():
     SizeDialog('flower')
-    print('flower')
     SetColor()
-    # Code
+
 
 
 def Leaf():
     SizeDialog('leaf')
-    print('Leaf')
     SetColor()
-    # Code
+    print(radius)
+    #radius = int(input("What is the radius of the flower? "))
+    #petals = int(input("How many petals do you want? "))
 
+    for _ in range(int(num_of)):
+        leafbranch()
+        trtl.left(360 / num_of)
+
+def leafbranch():
+    heading = trtl.heading()
+    trtl.circle(radius, 60)
+    trtl.left(120)
+    trtl.circle(radius, 60)
+    trtl.setheading(heading)
 
 def text():
     print('Text')
@@ -227,8 +238,8 @@ trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv, distance_sv, sharpness_sv = DoubleVar(
-), DoubleVar(), DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar()
 
 
 def SizeDialog(shape):
@@ -246,9 +257,7 @@ def SizeDialog(shape):
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
-            "Add "+shape, "Number of leaves", parent=window))
-        sharpness_sv.set(simpledialog.askstring(
-            "Add "+shape, "Sharpness", parent=window))    
+            "Add "+shape, "Number of leaves", parent=window))    
     if shape == "dotpattern":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -269,7 +278,6 @@ def SizeDialog(shape):
     num_of = float(num_of_sv.get())
     size = float(size_sv.get())
     distance = float(distance_sv.get())
-    sharpness = float(sharpness_sv.get())
 
 
 def btn_clicked():
