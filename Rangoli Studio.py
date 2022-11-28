@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 36
+# Rangoli Studio, version = Alpha 37
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -54,8 +54,8 @@ click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color = 'blue', 'white'  # Default Color
-radius, num_of, distance, size, sharpness = float, float, float, float, float  #SizeDialog() & Functions
-psize = int
+radius, distance, sharpness, num_of, size = float, float, float, int, int  #SizeDialog() & Functions
+psize = int #Pen Size
 # == Drawing Functions ==
 # Useful variables: radius, num_of, distance, size
 # Useful functions: SizeDialog('enter_shape_name'), SetColor(), CenterTurtle() 
@@ -104,21 +104,28 @@ def Polygon():
     trtl.pensize(psize)
     radius = -size
     CenterTurtle()
-    for _ in range(int(num_of)):
-        trtl.forward(int(size))
+    for _ in range(num_of):
+        trtl.forward(size)
         trtl.right(360 / num_of)
     trtl.pensize(1)
 
 def Flower():
     SizeDialog('flower')
     SetColor()
-
+    trtl.penup()
+    GOTO(0,radius)
+    trtl.setheading(0)
+    for i in range(1,num_of+1):
+        trtl.setheading(360/num_of*i + (180/num_of))
+        trtl.circle(radius*3.5/num_of,180)
+    trtl.pendown()
+    trtl.setheading(0)
 
 
 def Leaf():
     SizeDialog('leaf')
     SetColor()
-    for _ in range(int(num_of)):
+    for _ in range(num_of):
         LeafBranch()
         trtl.left(360 / num_of)
 def LeafBranch():
@@ -300,8 +307,8 @@ def SizeDialog(shape):
             "Add "+shape, "Number of petals", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
-    num_of = float(num_of_sv.get())
-    size = float(size_sv.get())
+    num_of = int(num_of_sv.get())
+    size = int(size_sv.get())
     distance = float(distance_sv.get())
     psize = int(psize_sv.get())
 
