@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 33
+# Rangoli Studio, version = Alpha 34
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -96,20 +96,14 @@ def Arc():
 
 
 def Polygon():
+    global radius, size
     SizeDialog('polygon')
-    print('Polygon')
     SetColor()
-    
-    #t = turtle.Turtle()
-  
-    # taking input for the no of the sides of the polygon
-    #n = int(input("Enter the no of the sides of the polygon : "))
-  
-    # taking input for the length of the sides of the polygon
-    #l = int(input("Enter the length of the sides of the polygon : "))
-    #for _ in range(n):
-    #    turtle.forward(l)
-    #    turtle.right(360 / n)
+    radius = -size
+    CenterTurtle()
+    for _ in range(int(num_of)):
+        trtl.forward(int(size))
+        trtl.right(360 / num_of)
 
 def Flower():
     SizeDialog('flower')
@@ -120,15 +114,10 @@ def Flower():
 def Leaf():
     SizeDialog('leaf')
     SetColor()
-    print(radius)
-    #radius = int(input("What is the radius of the flower? "))
-    #petals = int(input("How many petals do you want? "))
-
     for _ in range(int(num_of)):
-        leafbranch()
+        LeafBranch()
         trtl.left(360 / num_of)
-
-def leafbranch():
+def LeafBranch():
     heading = trtl.heading()
     trtl.circle(radius, 60)
     trtl.left(120)
