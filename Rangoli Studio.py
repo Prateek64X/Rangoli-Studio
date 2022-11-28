@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 39
+# Rangoli Studio, version = Alpha 40
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -68,6 +68,7 @@ def Circle():
     CenterTurtle()  # Centers turtle before drawing circle
     trtl.circle(radius)  # Draw circle for given radius
     trtl.end_fill()  # Fill color
+    trtl.pencolor('white')
 
 def DotPattern():
     global distance
@@ -110,6 +111,7 @@ def Polygon():
         trtl.right(360 / num_of)
     trtl.pensize(1)
     trtl.end_fill()
+    trtl.pencolor('white')
 
 def Flower():
     SizeDialog('flower')
@@ -123,6 +125,7 @@ def Flower():
     trtl.pendown()
     trtl.setheading(0)
     trtl.end_fill()
+    trtl.pencolor('white')
 
 
 def Leaf():
@@ -132,12 +135,14 @@ def Leaf():
         LeafBranch()
         trtl.left(360 / num_of)
 def LeafBranch():
+    SetColor()
     heading = trtl.heading()
     trtl.circle(radius, 60)
     trtl.left(120)
     trtl.circle(radius, 60)
     trtl.setheading(heading)
     trtl.end_fill()
+    trtl.pencolor('white')
 
 def text():
     print('Text')
@@ -164,6 +169,8 @@ def ColorSelection(color):
     global fill_color, line_color
     fill_color = color
     line_color = color
+    trtl.color(fill_color)
+    trtl.pencolor(line_color)
 
 def ColorPallete():
     global fill_color, line_color
@@ -171,6 +178,8 @@ def ColorPallete():
     print(color_code)
     fill_color = color_code[1]
     line_color = color_code[1]
+    trtl.color(fill_color)
+    trtl.pencolor(line_color)
 
 
 def FileSystem(fs: int):
@@ -284,34 +293,34 @@ def SizeDialog(shape):
     global radius, num_of, size, distance
     shape = shape.lower()
     if shape == "circle":
-        radius_sv.set(simpledialog.askstring(
+        radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
     if shape == "polygon":
-        size_sv.set(simpledialog.askstring(
+        size_sv.set(simpledialog.askinteger(
             "Add "+shape, "Enter size of side", parent=window))
-        num_of_sv.set(simpledialog.askstring(
+        num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Number of sides", parent=window))
     if shape == "leaf":
-        radius_sv.set(simpledialog.askstring(
+        radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
-        num_of_sv.set(simpledialog.askstring(
+        num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Number of leaves", parent=window))    
     if shape == "dotpattern":
-        radius_sv.set(simpledialog.askstring(
+        radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
-        size_sv.set(simpledialog.askstring(
+        size_sv.set(simpledialog.askinteger(
             "Add "+shape, "Size of dots", parent=window))
-        distance_sv.set(simpledialog.askstring(
+        distance_sv.set(simpledialog.askfloat(
             "Add "+shape, "Distance of dots", parent=window))
     if shape == "arc":
-        radius_sv.set(simpledialog.askstring(
+        radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
-        num_of_sv.set(simpledialog.askstring(
+        num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Enter the Degree", parent=window))
     if shape == "flower":
-        radius_sv.set(simpledialog.askstring(
+        radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
-        num_of_sv.set(simpledialog.askstring(
+        num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Number of petals", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
