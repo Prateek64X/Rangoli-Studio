@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 38
+# Rangoli Studio, version = Alpha 39
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -276,12 +276,12 @@ trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv, distance_sv, psize_sv = DoubleVar(
-), DoubleVar(), DoubleVar(), DoubleVar(), DoubleVar()
-
+radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar()
+psize_sv = IntVar()
 
 def SizeDialog(shape):
-    global radius, num_of, size, distance, psize
+    global radius, num_of, size, distance
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askstring(
@@ -291,8 +291,6 @@ def SizeDialog(shape):
             "Add "+shape, "Enter size of side", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of sides", parent=window))
-        psize_sv.set(simpledialog.askstring(
-            "Add "+shape, "Enter Line Weight", parent=window))
     if shape == "leaf":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -310,8 +308,6 @@ def SizeDialog(shape):
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter the Degree", parent=window))
-        psize_sv.set(simpledialog.askstring(
-            "Add "+shape, "Enter Line Weight", parent=window))
     if shape == "flower":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -322,8 +318,10 @@ def SizeDialog(shape):
     num_of = int(num_of_sv.get())
     size = int(size_sv.get())
     distance = float(distance_sv.get())
-    psize = int(psize_sv.get())
 
+def ConvertSliderVal():
+    global psize
+    psize = int(psize_sv.get())
 # Function initialization
 # canvas.bind('<Button-1>', DotPattern)   #Removed
 
@@ -341,7 +339,7 @@ b0 = Button(
 
 b0.place(
     # Button's location on screen
-    x=21, y=625,
+    x=21, y=660,
     width=82,
     height=38)
 ToolTip(b0, msg="Color Pallete")
@@ -356,7 +354,7 @@ b1 = Button(
     activebackground="#000000",
     bg="#171717")
 b1.place(
-    x=65, y=571,
+    x=65, y=610,
     width=38,
     height=38)
 
@@ -370,7 +368,7 @@ b2 = Button(
     activebackground="#000000",
     bg="#171717")
 b2.place(
-    x=21, y=571,
+    x=21, y=610,
     width=38,
     height=38)
 
@@ -384,7 +382,7 @@ b3 = Button(
     activebackground="#000000",
     bg="#171717")
 b3.place(
-    x=65, y=527,
+    x=65, y=565,
     width=38,
     height=38)
 
@@ -398,7 +396,7 @@ b4 = Button(
     activebackground="#000000",
     bg="#171717")
 b4.place(
-    x=21, y=527,
+    x=21, y=565,
     width=38,
     height=38)
 
@@ -412,7 +410,7 @@ b5 = Button(
     activebackground="#000000",
     bg="#171717")
 b5.place(
-    x=65, y=483,
+    x=65, y=520,
     width=38,
     height=38)
 
@@ -426,7 +424,7 @@ b6 = Button(
     activebackground="#000000",
     bg="#171717")
 b6.place(
-    x=21, y=483,
+    x=21, y=520,
     width=38,
     height=38)
 
@@ -440,7 +438,7 @@ b7 = Button(
     activebackground="#000000",
     bg="#171717")
 b7.place(
-    x=65, y=439,
+    x=65, y=475,
     width=38,
     height=37)
 ToolTip(b7, msg="Pattern")
@@ -455,7 +453,7 @@ b8 = Button(
     activebackground="#000000",
     bg="#171717")
 b8.place(
-    x=21, y=439,
+    x=21, y=475,
     width=38,
     height=37)
 ToolTip(b8, msg="Pattern")
@@ -470,7 +468,7 @@ b9 = Button(
     activebackground="#000000",
     bg="#171717")
 b9.place(
-    x=65, y=394,
+    x=65, y=430,
     width=38,
     height=38)
 
@@ -484,7 +482,7 @@ b10 = Button(
     activebackground="#000000",
     bg="#171717")
 b10.place(
-    x=21, y=394,
+    x=21, y=430,
     width=38,
     height=38)
 
@@ -498,7 +496,7 @@ b11 = Button(
     activebackground="#000000",
     bg="#171717")
 b11.place(
-    x=22, y=285,
+    x=22, y=320,
     width=82,
     height=37)
 ToolTip(b11, msg="Symmetry ON/OFF")
@@ -514,10 +512,27 @@ symmetry_slider = Scale(
     highlightthickness=0,
     variable=symmetryVal)
 symmetry_slider.place(
-    x=22, y=325,
+    x=22, y=275,
     width=82,
-    height=46)
+    height=38)
 ToolTip(symmetry_slider, msg="Symmetrical divisions")
+
+pensize_slider = Scale(
+    window,
+    from_=1,
+    to=36,
+    orient='horizontal',
+    fg="#ffffff",
+    bg="#171717",
+    troughcolor="#000000",
+    highlightthickness=0,
+    variable = psize_sv,
+    command=lambda x=None: ConvertSliderVal())
+pensize_slider.place(
+    x=22, y=365,
+    width=82,
+    height=38)
+ToolTip(pensize_slider, msg="Line Weight")
 
 img12 = PhotoImage(file=f"./images/img12.png")
 b12 = Button(
