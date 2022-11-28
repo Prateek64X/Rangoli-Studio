@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 35
+# Rangoli Studio, version = Alpha 36
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -55,7 +55,7 @@ toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color = 'blue', 'white'  # Default Color
 radius, num_of, distance, size, sharpness = float, float, float, float, float  #SizeDialog() & Functions
-
+psize = int
 # == Drawing Functions ==
 # Useful variables: radius, num_of, distance, size
 # Useful functions: SizeDialog('enter_shape_name'), SetColor(), CenterTurtle() 
@@ -93,17 +93,21 @@ def Arc():
     #By Saad
     SizeDialog('arc')
     SetColor()
+    trtl.pensize(psize)
     trtl.circle(radius,num_of)
+    trtl.pensize(1)
 
 def Polygon():
     global radius, size
     SizeDialog('polygon')
     SetColor()
+    trtl.pensize(psize)
     radius = -size
     CenterTurtle()
     for _ in range(int(num_of)):
         trtl.forward(int(size))
         trtl.right(360 / num_of)
+    trtl.pensize(1)
 
 def Flower():
     SizeDialog('flower')
@@ -177,18 +181,43 @@ def grid():
     print('Grid')
 
 def About():
-    print('About')
     aboutWin = Toplevel(window)
-    aboutWin.title("New Window")
-    aboutWin.geometry("400x400")
+    aboutWin.title("About Rangoli Studio")
+    aboutWin.geometry("960x540")
     aboutWin.configure(bg="#171717")
-    Label(aboutWin,text ="About Software - Created by Harsh - Edit this Section",
+    aboutWin.wm_transient(window)
+    #Title
+    Label(aboutWin,text ="Rangoli Studio",
         fg="#ffffff",
-        bg="#171717").pack()
-    #Center window
-    #Add Description
+        bg="#171717",
+        font="Calibri, 18").pack()
+    #Desc
+    Label(aboutWin,text ="Rangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
     #Controls
-    #Designed by & Add github link of project
+    Label(aboutWin,text ="Controls",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 16").pack()
+    Label(aboutWin,text ="Mouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    #Devs
+    Label(aboutWin,text ="Designed By",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    Label(aboutWin,text ="SVVV B.TECH CSE-MA, Section F",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, DJ, Saad Ahmed Qureshi",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
 
 
 # == Helper Functions ==
@@ -223,16 +252,17 @@ def GOTO(x, y):
     trtl.pendown()
 
 trtl.ondrag(Drag_Turtle)
+trtl.onclick(clickRight,btn=2)
 trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
-), DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv, psize_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar(), DoubleVar()
 
 
 def SizeDialog(shape):
-    global radius, num_of, size, distance
+    global radius, num_of, size, distance, psize
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askstring(
@@ -242,6 +272,8 @@ def SizeDialog(shape):
             "Add "+shape, "Enter size of side", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Number of sides", parent=window))
+        psize_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter Line Weight", parent=window))
     if shape == "leaf":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -259,6 +291,8 @@ def SizeDialog(shape):
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter the Degree", parent=window))
+        psize_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter Line Weight", parent=window))
     if shape == "flower":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
@@ -269,11 +303,7 @@ def SizeDialog(shape):
     num_of = float(num_of_sv.get())
     size = float(size_sv.get())
     distance = float(distance_sv.get())
-
-
-def btn_clicked():
-    print("Button Clicked")
-
+    psize = int(psize_sv.get())
 
 # Function initialization
 # canvas.bind('<Button-1>', DotPattern)   #Removed
