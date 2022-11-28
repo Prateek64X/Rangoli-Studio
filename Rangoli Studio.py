@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 34
+# Rangoli Studio, version = Alpha 35
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -89,11 +89,11 @@ def Arc():
     #1. User point turtle and clicks button
     #2. User then drags turtle to another location
     #3. After leaving left click, SizeDialog is called
-    pos_before = trtl.position  #Note pos before dragging
     #Call after finishing drag
+    #By Saad
     SizeDialog('arc')
     SetColor()
-
+    trtl.circle(radius,num_of)
 
 def Polygon():
     global radius, size
@@ -257,6 +257,8 @@ def SizeDialog(shape):
     if shape == "arc":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
+        num_of_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter the Degree", parent=window))
     if shape == "flower":
         radius_sv.set(simpledialog.askstring(
             "Add "+shape, "Enter radius", parent=window))
