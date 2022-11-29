@@ -22,22 +22,37 @@ Team Members:
 
 Functionality:
 ✅ 1. Pattern [Shashank] - Create ..., --- like circular patterns
+
 ✅ 2. Arc [Saad]- Draw an arc from point A to B
+
 ✅ 3. Polygon [DJ]- Draw polygons with variable sides
+
 ✅ 4. Circle [Pratham]- Draw circles
+
 ✅ 5. Flower [PP] - Draw flower petals around circular path
+
 ✅ 6. PaintBucket [PP] - Paint the selected enclosed shape
+
 ✅ 7. Leaf [Tanaygeet]- Draw sharp leaves around circular path
+
 ✅ 8. Text [Pratham] - Add Text on screen
+
    9. Symmetry - Toggle On/Off Symmetry option
+   
 ✅ 10. Colors [Tanaygeet]- Changes color variable used for filling and drawing
+
 ✅ 11. Color Pallete [Tanaygeet]- Choose variety of colors
+
 ✅ 12. File Save-Open [PP]
+
 ✅ 13. Grid [Harsh]- Show/Hide
+
 ✅ 14. About [Harsh]- Show credits of all developers and a cool intro of our app
 
 A. Combine multiple dialogs for radius, num_of... into 1 dialog
+
 ✅ B. Add a slider for Pen Size
+
 ✅ C. Show if Paint Bucket is ON/OFF in UI
 
 App Features:
