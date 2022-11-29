@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 43"
+version = "Alpha 44"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -190,7 +190,7 @@ def FileSystem(fs: int):
     global canvasT, turtle_img
     #New File
     if (fs == 0):
-        canvasT.delete('all')
+        canvasT.delete('openedImage')
         trtl.clear()
         trtl.setheading(0)
         trtl.penup()
@@ -202,7 +202,10 @@ def FileSystem(fs: int):
         turtle_img = PhotoImage(file=file_path)
         timage = canvasT.create_image(
             0.0, 0.0,
-            image=turtle_img)
+            image=turtle_img,
+            tags='openedImage')
+        trtl.setheading(0)
+        trtl.pendown()
     #Save File
     elif (fs == 2):
         #Save EPS File
