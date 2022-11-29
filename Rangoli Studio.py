@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 45"
+version = "Alpha 46"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -291,7 +291,7 @@ def About():
         fg="#ffffff",
         bg="#171717",
         font="Calibri, 10").pack()
-    Label(aboutWin,text ="Prateek Panwar, Harsh Mishra, Shashank Shinde, Tanaygeet Shrivastava\nDhairya Jain, Saad Ahmed Qureshi, Pratham Rathore",
+    Label(aboutWin,text ="Prateek Panwar, Harsh Mishra, Shashank Shinde, Pratham Rathore\nTanaygeet Shrivastava, Dhairya Jain, Saad Ahmed Qureshi",
         fg="#ffffff",
         bg="#171717",
         font="Calibri, 12").pack()
