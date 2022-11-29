@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 42"
+version = "Alpha 43"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -9,7 +9,7 @@ version = "Alpha 42"
 from tkinter import *
 from tkinter import simpledialog, filedialog, colorchooser
 from tktooltip import ToolTip
-from PIL import Image, ImageTk, EpsImagePlugin
+from PIL import Image, ImageTk, EpsImagePlugin, ImageGrab
 from turtle import Turtle, Screen
 import turtle
 import webbrowser
@@ -185,12 +185,12 @@ def ColorPallete():
     trtl.color(fill_color)
     trtl.pencolor(line_color)
 
-
+turtle_img = PhotoImage()
 def FileSystem(fs: int):
-    print('FileSystem', fs)
-    filename = 'image'
+    global canvasT, turtle_img
     #New File
     if (fs == 0):
+        canvasT.delete('')
         trtl.clear()
         trtl.setheading(0)
         trtl.penup()
@@ -198,12 +198,25 @@ def FileSystem(fs: int):
         trtl.pendown()
     #Open File
     elif (fs == 1):
-        print("Open")
-        file_path = filedialog.askopenfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+        file_path = filedialog.askopenfilename(initialfile = 'Drawing', title="Save File", filetypes=[('PNG Image','*.png'),('JPEG Image',['*.jpeg','*.jpg']),('All Files','*.*')])
+        turtle_img = PhotoImage(file=file_path)
+        timage = canvasT.create_image(
+            0.0, 0.0,
+            image=turtle_img)
     #Save File
     elif (fs == 2):
-        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
-        canvasT.postscript(file=file_path, colormode='color')
+        #Save EPS File
+        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps'),('PNG File','*.png')])
+        canvasT.postscript(file=file_path+'.eps', colormode='color')
+        
+        #Save PNG File
+        trtl.hideturtle()
+        x0 = canvasT.winfo_rootx()
+        y0 = canvasT.winfo_rooty()
+        x1 = x0 + canvasT.winfo_width()
+        y1 = y0 + canvasT.winfo_height()
+        ImageGrab.grab().crop((x0, y0, x1, y1)).save(file_path+'.png')
+        trtl.showturtle()
 
 showGrid = False
 def grid():
