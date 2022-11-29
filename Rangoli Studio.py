@@ -245,6 +245,41 @@ def About():
     aboutWin.configure(bg="#171717")
     aboutWin.wm_transient(window)
     
+    #Title
+    Label(aboutWin,text ="Rangoli Studio",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 18").pack()
+    #Desc
+    Label(aboutWin,text ="Rangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+  
+    # aboutWin.create_line(20,20,aboutWin.winfo_screenwidth-20,20)
+    
+    #Controls
+    Label(aboutWin,text ="Controls",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 16").pack()
+    Label(aboutWin,text ="Mouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    #Devs
+    Label(aboutWin,text ="Designed By",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    Label(aboutWin,text ="SVVV B.TECH CSE-MA, Section F",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, DJ, Saad Ahmed Qureshi",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
     # github function code
     def github():
         print('redirect')
