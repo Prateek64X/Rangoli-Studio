@@ -1,4 +1,5 @@
-# Rangoli Studio, version = Alpha 41
+# Rangoli Studio
+version = "Alpha 42"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -239,7 +240,6 @@ def Preset():
 
 img100 = PhotoImage(file=f"./images/img_git.png")
 def About():
-    
     aboutWin = Toplevel(window)
     aboutWin.title("About Rangoli Studio")
     aboutWin.geometry("960x540")
@@ -247,69 +247,61 @@ def About():
     aboutWin.wm_transient(window)
     
     #Title
-    Label(aboutWin,text ="Rangoli Studio",
+    Label(aboutWin,text ="\nRangoli Studio",
         fg="#ffffff",
         bg="#171717",
-        font= ('Helvetica 18 underline')).pack()
-    #Desc
-    Label(aboutWin,text ="Rangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.",
+        font="Calibri, 20").pack()
+    Label(aboutWin,text ="\nRangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.\n",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 12").pack(padx=5,pady=20)
-  
+        font="Calibri, 12").pack()
+    
     #Controls
     Label(aboutWin,text ="Controls",
         fg="#ffffff",
         bg="#171717",
-        font= ('Helvetica 18 underline')).pack()
-    
-    Label(aboutWin,text ="Mouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 14").pack(padx=5,pady=20)
-    #Devs
-    Label(aboutWin,text ="Designed By",
-        fg="#ffffff",
-        bg="#171717",
-        font= ('Helvetica 18 underline')).pack(padx=4,pady=10)
-    Label(aboutWin,text ="SVVV B.TECH CSE-MA, Section F",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 14").pack(padx=4,pady=10)
-    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, Dhairya Jain, Saad Ahmed Qureshi , Shashank Shinde, Harsh Mishra ",
+        font="Calibri, 16").pack()
+    Label(aboutWin,text ="\nMouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
         fg="#ffffff",
         bg="#171717",
         font="Calibri, 12").pack()
+
+    #Devs
+    Label(aboutWin,text ="\nDesigned By",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 16").pack()
+    Label(aboutWin,text ="\nSVVV B.TECH CSE-MA, Section F",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 10").pack()
+    Label(aboutWin,text ="Prateek Panwar, Harsh Mishra, Shashank Shinde, Tanaygeet Shrivastava\nDhairya Jain, Saad Ahmed Qureshi, Pratham Rathore",
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 12").pack()
+    versionLabel = Label(aboutWin,text = "\nVersion: "+version,
+        fg="#ffffff",
+        bg="#171717",
+        font="Calibri, 9").pack()
+
     # github function code
-    
     def github():
-        global img100
         print('redirect')
-        # open webpage with default app
-        webbrowser.open('https://github.com/Prateek64X/Rangoli-Studio')
+        webbrowser.open('https://github.com/Prateek64X/Rangoli-Studio/graphs/contributors')
 
     # code for button
     btn = Button(aboutWin,image=img100,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: github(),
-    relief="flat",
-    activebackground="#000000",
-    bg="#171717")
-
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: github(),
+        relief="flat",
+        activebackground="#000000",
+        bg="#171717")
     btn.place(
-    x=795, y=470,
-    width=160,
-    height=65)
+        x=400, y=460,
+        width=160,
+        height=65)
     ToolTip(btn, msg="GitHub")
-    
-
-    # code for github Button
-    
-    
-    
-    
-
 
 # == Helper Functions ==
 def SetColor():
