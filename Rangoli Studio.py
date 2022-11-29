@@ -190,7 +190,7 @@ def FileSystem(fs: int):
     global canvasT, turtle_img
     #New File
     if (fs == 0):
-        canvasT.delete('')
+        canvasT.delete('all')
         trtl.clear()
         trtl.setheading(0)
         trtl.penup()
