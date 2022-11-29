@@ -159,11 +159,13 @@ def Symmetry():
     # Code
 
 def PaintBucket():
-    global canFill
+    global canFill, img14, b14
     if (canFill == True):
         canFill = False
+        b14.configure(image=img14)
     else:
         canFill = True
+        b14.configure(image=img14_ON)
 
 def ColorSelection(color):
     global fill_color, line_color
@@ -205,6 +207,9 @@ def FileSystem(fs: int):
 def grid():
     #Canvas size = 1130x630
     print('Grid')
+
+def Preset():
+    print("Show Preset")
 
 def About():
     aboutWin = Toplevel(window)
@@ -574,8 +579,9 @@ b13.place(
 ToolTip(b13, msg="Leaf")
 
 img14 = PhotoImage(file=f"./images/img14.png")
+img14_ON = PhotoImage(file=f"./images/img14_ON.png")
 b14 = Button(
-    image=img14,
+    image=img14_ON,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: PaintBucket(),
@@ -673,7 +679,7 @@ b20 = Button(
     activebackground="#000000",
     bg="#171717")
 b20.place(
-    x=1219, y=14,
+    x=1220, y=14,
     width=38,
     height=38)
 ToolTip(b20, msg="About")
@@ -692,6 +698,21 @@ b21.place(
     width=38,
     height=38)
 ToolTip(b21, msg="Grid Show/Hide")
+
+img25 = PhotoImage(file=f"./images/img25.png")
+b25 = Button(
+    image=img25,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: Preset(),
+    relief="flat",
+    activebackground="#000000",
+    bg="#171717")
+b25.place(
+    x=1130, y=14,
+    width=38,
+    height=38)
+ToolTip(b25, msg="Presets")
 
 img22 = PhotoImage(file=f"./images/img22.png")
 b22 = Button(
