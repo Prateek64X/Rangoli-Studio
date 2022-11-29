@@ -239,6 +239,7 @@ def Preset():
 
 img100 = PhotoImage(file=f"./images/img_git.png")
 def About():
+    
     aboutWin = Toplevel(window)
     aboutWin.title("About Rangoli Studio")
     aboutWin.geometry("960x540")
@@ -249,43 +250,43 @@ def About():
     Label(aboutWin,text ="Rangoli Studio",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 18").pack()
+        font= ('Helvetica 18 underline')).pack()
     #Desc
     Label(aboutWin,text ="Rangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 12").pack()
+        font="Calibri, 12").pack(padx=5,pady=20)
   
-    # aboutWin.create_line(20,20,aboutWin.winfo_screenwidth-20,20)
-    
     #Controls
     Label(aboutWin,text ="Controls",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 16").pack()
+        font= ('Helvetica 18 underline')).pack()
+    
     Label(aboutWin,text ="Mouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 12").pack()
+        font="Calibri, 14").pack(padx=5,pady=20)
     #Devs
     Label(aboutWin,text ="Designed By",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 12").pack()
+        font= ('Helvetica 18 underline')).pack(padx=4,pady=10)
     Label(aboutWin,text ="SVVV B.TECH CSE-MA, Section F",
         fg="#ffffff",
         bg="#171717",
-        font="Calibri, 12").pack()
-    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, DJ, Saad Ahmed Qureshi",
+        font="Calibri, 14").pack(padx=4,pady=10)
+    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, Dhairya Jain, Saad Ahmed Qureshi , Shashank Shinde, Harsh Mishra ",
         fg="#ffffff",
         bg="#171717",
         font="Calibri, 12").pack()
     # github function code
+    
     def github():
+        global img100
         print('redirect')
-        webbrowser.open('https://github.com/Prateek64X/Rangoli-Studio/graphs/contributors')
-
-
+        # open webpage with default app
+        webbrowser.open('https://github.com/Prateek64X/Rangoli-Studio')
 
     # code for button
     btn = Button(aboutWin,image=img100,
