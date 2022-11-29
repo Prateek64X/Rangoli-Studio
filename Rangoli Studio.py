@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 44"
+version = "Alpha 45"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -56,7 +56,7 @@ click_num, x2, y2 = 0, 0, 0  # Line: Mouseclick
 toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color, canFill = 'blue', 'white', True  # Default Color
-radius, distance, sharpness, num_of, size = float, float, float, int, int  #SizeDialog() & Functions
+radius, distance, sharpness, num_of, size, printtext = float, float, float, int, int, str  #SizeDialog() & Functions
 psize = int #Pen Size
 
 # == Drawing Functions ==
@@ -147,9 +147,9 @@ def LeafBranch():
     trtl.pencolor('white')
 
 def text():
-    print('Text')
-    # Code
-
+    SizeDialog('text')
+    style = ('Times New Roman', size)
+    trtl.write(printtext, font=style, align='center')
 
 def Symmetry():
     global toggleSymmetry
@@ -358,12 +358,12 @@ trtl.onclick(clickRight,btn=3)
 
 #Dialogs & Helpers
 # Dialog to ask for size, curvature, etc
-radius_sv, num_of_sv, size_sv, distance_sv = DoubleVar(
-), DoubleVar(), DoubleVar(), DoubleVar()
+radius_sv, num_of_sv, size_sv, distance_sv, printtext_sv = DoubleVar(
+), DoubleVar(), DoubleVar(), DoubleVar(), StringVar()
 psize_sv = IntVar()
 
 def SizeDialog(shape):
-    global radius, num_of, size, distance
+    global radius, num_of, size, distance, printtext
     shape = shape.lower()
     if shape == "circle":
         radius_sv.set(simpledialog.askfloat(
@@ -395,11 +395,17 @@ def SizeDialog(shape):
             "Add "+shape, "Enter radius", parent=window))
         num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Number of petals", parent=window))
+    if shape == "text":
+        printtext_sv.set(simpledialog.askstring(
+            "Add "+shape, "Enter Text", parent=window))
+        size_sv.set(simpledialog.askinteger(
+            "Add "+shape, "Enter Font Size", parent=window))
     # Converting to int
     radius = float(radius_sv.get())
     num_of = int(num_of_sv.get())
     size = int(size_sv.get())
     distance = float(distance_sv.get())
+    printtext = printtext_sv.get()
 
 def ConvertSliderVal():
     global psize
