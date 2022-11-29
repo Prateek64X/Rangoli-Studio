@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 40
+# Rangoli Studio, version = Alpha 41
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -203,10 +203,34 @@ def FileSystem(fs: int):
         file_path = filedialog.asksaveasfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
         canvasT.postscript(file=file_path, colormode='color')
 
-
+showGrid = False
 def grid():
     #Canvas size = 1130x630
+    global showGrid
     print('Grid')
+    grid_value = 10
+    w = canvasT.winfo_width() # Get current width of canvas
+    h = canvasT.winfo_height() # Get current height of canvas
+    
+    if showGrid==True:
+        canvasT.delete('grid_line') # Will only remove the grid_line
+        showGrid = False
+    else:
+        
+    # canvasT.create_line(-w,25,w,25, tag='grid_line')
+# Creates all vertical lines at intevals of 100
+        for i in range(-w, w, grid_value):
+            if i%100==0:
+                canvasT.create_line(i, -h, i, h, tag='grid_line',fill='#8c8c8c')
+
+    # Creates all horizontal lines at intevals of 100
+        for i in range(-h, h, grid_value):
+            if i%100==0:
+                canvasT.create_line(-w, i, w, i, tag='grid_line',fill='#8c8c8c')
+        showGrid=True
+
+
+# window.mainloop()
 
 def Preset():
     print("Show Preset")
