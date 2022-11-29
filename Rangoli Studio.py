@@ -1,4 +1,4 @@
-# Rangoli Studio, version = Alpha 43
+# Rangoli Studio, version = Alpha 41
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -8,9 +8,10 @@
 from tkinter import *
 from tkinter import simpledialog, filedialog, colorchooser
 from tktooltip import ToolTip
-from PIL import Image, ImageGrab
+from PIL import Image, ImageTk, EpsImagePlugin
 from turtle import Turtle, Screen
 import turtle
+import webbrowser
 
 #Window and Canvas
 window = Tk()
@@ -183,39 +184,25 @@ def ColorPallete():
     trtl.color(fill_color)
     trtl.pencolor(line_color)
 
-turtle_img = PhotoImage()
+
 def FileSystem(fs: int):
-    global canvasT, turtle_img
+    print('FileSystem', fs)
+    filename = 'image'
     #New File
     if (fs == 0):
-        canvasT.delete('all')
         trtl.clear()
         trtl.setheading(0)
         trtl.penup()
         trtl.goto(0,0)
         trtl.pendown()
-
     #Open File
     elif (fs == 1):
-        file_path = filedialog.askopenfilename(initialfile = 'Drawing', title="Save File", filetypes=[('PNG Image','*.png'),('JPEG Image',['*.jpeg','*.jpg']),('All Files','*.*')])
-        turtle_img = PhotoImage(file=file_path)
-        timage = canvasT.create_image(
-            0.0, 0.0,
-            image=turtle_img)
-
+        print("Open")
+        file_path = filedialog.askopenfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
     #Save File
     elif (fs == 2):
-        #Save EPS File
-        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps'),('PNG File','*.png'),('All Files','*.*')])
-        canvasT.postscript(file=file_path+'.eps', colormode='color')
-        #Save PNG File
-        trtl.hideturtle()
-        x0 = canvasT.winfo_rootx()
-        y0 = canvasT.winfo_rooty()
-        x1 = x0 + canvasT.winfo_width()
-        y1 = y0 + canvasT.winfo_height()
-        ImageGrab.grab().crop((x0, y0, x1, y1)).save(file_path+'.png')
-        trtl.showturtle()
+        file_path = filedialog.asksaveasfilename(initialfile = 'Drawing.eps', title="Save File", filetypes=[('Inksscape, Illustrator EPS', '*.eps')])
+        canvasT.postscript(file=file_path, colormode='color')
 
 showGrid = False
 def grid():
@@ -230,9 +217,9 @@ def grid():
         canvasT.delete('grid_line') # Will only remove the grid_line
         showGrid = False
     else:
-
+        
     # canvasT.create_line(-w,25,w,25, tag='grid_line')
-    # Creates all vertical lines at intevals of 100
+# Creates all vertical lines at intevals of 100
         for i in range(-w, w, grid_value):
             if i%100==0:
                 canvasT.create_line(i, -h, i, h, tag='grid_line',fill='#8c8c8c')
@@ -249,44 +236,43 @@ def grid():
 def Preset():
     print("Show Preset")
 
+
+img100 = PhotoImage(file=f"./images/img_git.png")
 def About():
     aboutWin = Toplevel(window)
     aboutWin.title("About Rangoli Studio")
     aboutWin.geometry("960x540")
     aboutWin.configure(bg="#171717")
     aboutWin.wm_transient(window)
-    #Title
-    Label(aboutWin,text ="Rangoli Studio",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 18").pack()
-    #Desc
-    Label(aboutWin,text ="Rangoli Studio gives you power to create beautiful rangoli designs in your desktop easily.",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 12").pack()
-    #Controls
-    Label(aboutWin,text ="Controls",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 16").pack()
-    Label(aboutWin,text ="Mouse Left Click + Drag  -  Move turtle on screen \nMouse Right Click  -  Rotate turtle 90 degrees clockwise \nCtrl+C  -  Clear screen",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 12").pack()
-    #Devs
-    Label(aboutWin,text ="Designed By",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 12").pack()
-    Label(aboutWin,text ="SVVV B.TECH CSE-MA, Section F",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 12").pack()
-    Label(aboutWin,text ="Prateek Panwar, Pratham Rathore, Tanaygeet, DJ, Saad Ahmed Qureshi",
-        fg="#ffffff",
-        bg="#171717",
-        font="Calibri, 12").pack()
+    
+    # github function code
+    def github():
+        print('redirect')
+        webbrowser.open('https://github.com/Prateek64X/Rangoli-Studio/graphs/contributors')
+
+
+
+    # code for button
+    btn = Button(aboutWin,image=img100,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: github(),
+    relief="flat",
+    activebackground="#000000",
+    bg="#171717")
+
+    btn.place(
+    x=795, y=470,
+    width=160,
+    height=65)
+    ToolTip(btn, msg="GitHub")
+    
+
+    # code for github Button
+    
+    
+    
+    
 
 
 # == Helper Functions ==
@@ -796,6 +782,11 @@ b24.place(
     width=62,
     height=32)
 ToolTip(b24, msg="New")
+
+
+
+
+
 
 # Mainloop
 window.mainloop()
