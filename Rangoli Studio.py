@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 47"
+version = "Alpha 48"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -114,17 +114,21 @@ def Polygon():
 def Flower():
     SizeDialog('flower')
     SetColor()
-    trtl.penup()
+    GOTO(0,-radius)
+    trtl.circle(radius)
     GOTO(0,radius)
-    trtl.setheading(0)
-    for i in range(1,num_of+1):
-        trtl.setheading(360/num_of*i + (180/num_of))
-        trtl.circle(radius*3.5/num_of,180)
+    trtl.penup()
+    for i in range(num_of):
+        trtl.setheading(i * (360/num_of))
+        trtl.forward(radius)
+        trtl.pendown()
+        trtl.circle(radius*3.9/num_of)
+        trtl.penup()
+        trtl.back(radius)
     trtl.pendown()
     trtl.setheading(0)
     trtl.end_fill()
     trtl.pencolor('white')
-
 
 def Leaf():
     SizeDialog('leaf')
