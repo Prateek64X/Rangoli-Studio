@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 46"
+version = "Alpha 47"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -57,7 +57,7 @@ toggleSymmetry = False  # Symmetry On/OFF
 symmetryVal = 2  # Symmetry value 2 to 20
 fill_color, line_color, canFill = 'blue', 'white', True  # Default Color
 radius, distance, sharpness, num_of, size, printtext = float, float, float, int, int, str  #SizeDialog() & Functions
-psize = int #Pen Size
+psize = 1 #Pen Size
 
 # == Drawing Functions ==
 # Useful variables: radius, num_of, distance, size
@@ -102,15 +102,11 @@ def Arc():
     trtl.pensize(1)
 
 def Polygon():
-    global radius, size
     SizeDialog('polygon')
     SetColor()
-    trtl.pensize(psize)
-    radius = -size
     CenterTurtle()
-    for _ in range(num_of):
-        trtl.forward(size)
-        trtl.right(360 / num_of)
+    trtl.pensize(psize)
+    trtl.circle(radius,steps=num_of)
     trtl.pensize(1)
     trtl.end_fill()
     trtl.pencolor('white')
@@ -328,8 +324,9 @@ def SetColor():
         trtl.begin_fill()
 
 def CenterTurtle():
+    global radius
     trtl.setheading(0)  # Rotation to 0
-    GOTO(0, -radius)  # To goto given position relatively
+    GOTO(0.0, -radius)  # To goto given position relatively
 
 ## Turtle functions
 def clickRight(x,y):
@@ -369,8 +366,8 @@ def SizeDialog(shape):
         radius_sv.set(simpledialog.askfloat(
             "Add "+shape, "Enter radius", parent=window))
     if shape == "polygon":
-        size_sv.set(simpledialog.askinteger(
-            "Add "+shape, "Enter size of side", parent=window))
+        radius_sv.set(simpledialog.askinteger(
+            "Add "+shape, "Enter size", parent=window))
         num_of_sv.set(simpledialog.askinteger(
             "Add "+shape, "Number of sides", parent=window))
     if shape == "leaf":
@@ -832,11 +829,6 @@ b24.place(
     width=62,
     height=32)
 ToolTip(b24, msg="New")
-
-
-
-
-
 
 # Mainloop
 window.mainloop()
