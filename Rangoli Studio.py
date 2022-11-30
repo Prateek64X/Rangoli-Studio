@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 48"
+version = "Alpha 49"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -71,6 +71,7 @@ def Circle():
     trtl.circle(radius)  # Draw circle for given radius
     trtl.end_fill()  # Fill color
     trtl.pencolor('white')
+    GOTO(0,radius)
 
 def DotPattern():
     global distance
