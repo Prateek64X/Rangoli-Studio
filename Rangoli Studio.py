@@ -1,5 +1,5 @@
 # Rangoli Studio
-version = "Alpha 49"
+version = "Alpha 50"
 # By Section-F, CSE-MA
 # Credits: Prateek Panwar, Shashank Shinde, Dhairya Jain, Pratham Rathore, Rishab Dosi, Harsh Mishra, Saad Qureshi, Samarth Dubey
 # For new starters: Check ==Variables== and ==Shape Functions==
@@ -13,6 +13,7 @@ from PIL import Image, ImageTk, EpsImagePlugin, ImageGrab
 from turtle import Turtle, Screen
 import turtle
 import webbrowser
+import math
 
 #Window and Canvas
 window = Tk()
@@ -47,7 +48,7 @@ canvasT.place(relx=0.544, rely=0.540, anchor=CENTER)
 screen = turtle.TurtleScreen(canvasT)
 trtl = turtle.RawTurtle(canvasT)
 # trtl.listen()
-trtl.speed(-1)
+trtl.speed('fastest')
 trtl.screen.bgcolor("#171717")
 trtl.color("white")
 
@@ -115,21 +116,20 @@ def Polygon():
 def Flower():
     SizeDialog('flower')
     SetColor()
-    GOTO(0,-radius)
-    trtl.circle(radius)
-    GOTO(0,radius)
+    outer_radius = radius * 3.5 / math.pi
     trtl.penup()
-    for i in range(num_of):
-        trtl.setheading(i * (360/num_of))
-        trtl.forward(radius)
-        trtl.pendown()
-        trtl.circle(radius*3.9/num_of)
-        trtl.penup()
-        trtl.back(radius)
+    trtl.setx(-outer_radius)  # assumes heading of 0
     trtl.pendown()
-    trtl.setheading(0)
+
+    trtl.right(180 / num_of)
+
+    for _ in range(num_of):
+        trtl.right(180 - 360 / num_of)
+        trtl.circle(radius * 3.5 / num_of, 180)
     trtl.end_fill()
-    trtl.pencolor('white')
+    trtl.penup()
+    trtl.setx(outer_radius)  # assumes heading of 0
+    trtl.pendown()
 
 def Leaf():
     SizeDialog('leaf')
